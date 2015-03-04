@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - 2.2.1
+env:
+  global:
+    secure: "GsTst74irWe77XI+VJtJQKJjpc6Nz9z0CAEVcDglsNOJg//Enq2nyNeTkGexdge0AEa0u0kmYXFsWUrBteq0EBBGbZTl1XdMf1KW0CL8ni6i2AreaKkuV4e1aM/aXOD6lXycyzW/xaSo+9jvQyy2fF6mgs/pNNizFIz8Ja52iQY="
+script:
+  - COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN bundle exec rspec
