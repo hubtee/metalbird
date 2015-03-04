@@ -1,15 +1,15 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-require 'twitter_publisher/version'
+require 'post_publisher/version'
 
 Gem::Specification.new do |spec|
   # Project
-  spec.name        = 'twitter_publisher'
-  spec.version     = TwitterPublisher::VERSION
+  spec.name        = 'post_publisher'
+  spec.version     = PostPublisher::VERSION
   spec.licenses    = ['MIT']
   spec.platform    = Gem::Platform::RUBY
-  spec.homepage    = 'http://teetime.remotty.com'
-  spec.summary     = 'Library for publishing your contents to twitter'
-  spec.description = 'Library for publishing your contents to twitter'
+  spec.homepage    = 'http://post-publisher.remotty.com'
+  spec.summary     = 'Library for publishing your contents to various platforms'
+  spec.description = 'Library for publishing your contents to various platforms'
 
   # Requirement
   spec.required_ruby_version = '>= 2.0.0'

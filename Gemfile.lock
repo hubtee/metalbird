@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    twitter_publisher (0.0.1)
+    post_publisher (0.0.1)
       oauth (~> 0.4)
       twitter (~> 5)
 
@@ -134,6 +134,6 @@ DEPENDENCIES
   coveralls
   guard
   guard-rspec
+  post_publisher!
   rspec
   rubocop
-  twitter_publisher!

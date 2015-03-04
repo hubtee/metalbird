@@ -1,3 +1,3 @@
-require 'twitter_publisher'
+require 'post_publisher'
 require 'coveralls'
 Coveralls.wear!

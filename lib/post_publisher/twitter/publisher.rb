@@ -1,4 +1,4 @@
-module TwitterPublisher
+module PostPublisher
   class Publisher
     def initialize(auth)
       @client = auth.client

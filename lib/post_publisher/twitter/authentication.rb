@@ -1,6 +1,6 @@
 require 'twitter'
 
-module TwitterPublisher
+module PostPublisher
   class Authentication
     attr_reader :client
 

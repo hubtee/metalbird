@@ -1,4 +1,4 @@
-# Twitter Publisher Gem
+# Post Publisher Gem
 
 travis
 coveralls
