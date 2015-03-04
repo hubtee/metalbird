@@ -29,7 +29,8 @@ Gem::Specification.new do |spec|
   # spec.rdoc_options = ['--line-numbers', "--main", "README.rdoc"]
   
   # Dependency
-  spec.add_dependency('twitter', '~>5')
+  spec.add_dependency('twitter', '~> 5')
+  spec.add_dependency('oauth', '~> 0.4')
 
   # Development Dependency
   spec.add_development_dependency('guard')
