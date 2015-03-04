@@ -4,4 +4,5 @@
 bin/run.rb
 pkg
 coverage
+.yardoc
 
