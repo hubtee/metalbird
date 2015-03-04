@@ -15,6 +15,7 @@ module PostPublisher
         puts_authentication_information
       end
 
+      private
       def self.set_consumer_keys
         puts "Set your consumer_key: "
         @consumer_key = gets.chomp
