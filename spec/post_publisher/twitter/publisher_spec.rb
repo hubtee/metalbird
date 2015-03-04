@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PostPublisher::Publisher do
+describe PostPublisher::Twitter::Publisher do
   it 'secondTest' do
     
   end
