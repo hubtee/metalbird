@@ -4,6 +4,7 @@ rvm:
   - 2.2.1
 env:
   global:
-    secure: "GsTst74irWe77XI+VJtJQKJjpc6Nz9z0CAEVcDglsNOJg//Enq2nyNeTkGexdge0AEa0u0kmYXFsWUrBteq0EBBGbZTl1XdMf1KW0CL8ni6i2AreaKkuV4e1aM/aXOD6lXycyzW/xaSo+9jvQyy2fF6mgs/pNNizFIz8Ja52iQY="
+    - secure: "GsTst74irWe77XI+VJtJQKJjpc6Nz9z0CAEVcDglsNOJg//Enq2nyNeTkGexdge0AEa0u0kmYXFsWUrBteq0EBBGbZTl1XdMf1KW0CL8ni6i2AreaKkuV4e1aM/aXOD6lXycyzW/xaSo+9jvQyy2fF6mgs/pNNizFIz8Ja52iQY="
+    - SERVER_ENV=CI
 script:
-  - COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN bundle exec rspec
+  - bundle exec rspec
