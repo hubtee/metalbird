@@ -5,8 +5,8 @@ describe PostPublisher::Tumblr::Authentication do
     opts = {}
     opts[:consumer_key] = ''
     opts[:consumer_secret] = ''
-    opts[:access_token] = ''
-    opts[:access_token_secret] = ''
+    opts[:oauth_token] = ''
+    opts[:oauth_token_secret] = ''
 
     opts
   end
@@ -18,24 +18,24 @@ describe PostPublisher::Tumblr::Authentication do
       end.to raise_error(ArgumentError)
     end
 
-#    it 'is success when there are all authentication keys' do
-#      expect do
-#        PostPublisher::Twitter::Authentication.new(opts)
-#      end.to_not raise_error
-#    end
+    it 'is success when there are all authentication keys' do
+      expect do
+        PostPublisher::Tumblr::Authentication.new(opts)
+      end.to_not raise_error
+    end
   end
 
-#  describe 'Initialize' do
-#    let(:auth) do
-#      PostPublisher::Twitter::Authentication.new(opts)
-#    end
-#    
-#    it 'is set client object' do
-#      expect(auth.client).to_not be_nil
-#    end
-#
-#    specify 'Client object is a Twitter::Rest::Client instance' do
-#      expect(auth.client).to be_kind_of(Twitter::REST::Client)
-#    end
-#  end
+  describe 'Initialize' do
+    let(:auth) do
+      PostPublisher::Tumblr::Authentication.new(opts)
+    end
+    
+    it 'is set client object' do
+      expect(auth.client).to_not be_nil
+    end
+
+    specify 'Client object is a Tumblr::Client instance' do
+      expect(auth.client).to be_kind_of(Tumblr::Client)
+    end
+  end
 end

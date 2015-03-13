@@ -1,4 +1,4 @@
-require 'tumblr'
+require 'tumblr_client'
 
 module PostPublisher
   module Tumblr
@@ -6,23 +6,25 @@ module PostPublisher
       attr_reader :client
 
       def initialize(opts = {})
-        validate_opts(opts)
+				validate_opts(opts)
 
-        @client = ::Tumblr::REST::Client.new do |config|
+				::Tumblr.configure do |config|
           config.consumer_key = opts[:consumer_key]
           config.consumer_secret = opts[:consumer_secret]
-          config.access_token = opts[:access_token]
-          config.access_token_secret = opts[:access_token_secret]
+          config.oauth_token = opts[:oauth_token]
+          config.oauth_token_secret = opts[:oauth_token_secret]
         end
+
+				@client = ::Tumblr::Client.new
       end
 
       def validate_opts(opts)
         if !opts[:consumer_key] ||
            !opts[:consumer_secret] ||
-           !opts[:access_token] ||
-           !opts[:access_token_secret]
-
-          fail ArgumentError
+           !opts[:oauth_token] ||
+           !opts[:oauth_token_secret]
+        
+					fail ArgumentError
         end
       end
     end
