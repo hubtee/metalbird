@@ -6,16 +6,16 @@ module PostPublisher
       attr_reader :client
 
       def initialize(opts = {})
-				validate_opts(opts)
+        validate_opts(opts)
 
-				::Tumblr.configure do |config|
+        ::Tumblr.configure do |config|
           config.consumer_key = opts[:consumer_key]
           config.consumer_secret = opts[:consumer_secret]
           config.oauth_token = opts[:oauth_token]
           config.oauth_token_secret = opts[:oauth_token_secret]
         end
 
-				@client = ::Tumblr::Client.new
+        @client = ::Tumblr::Client.new
       end
 
       def validate_opts(opts)
@@ -24,7 +24,7 @@ module PostPublisher
            !opts[:oauth_token] ||
            !opts[:oauth_token_secret]
         
-					fail ArgumentError
+          fail ArgumentError
         end
       end
     end

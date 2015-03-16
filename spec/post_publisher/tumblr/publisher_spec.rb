@@ -11,7 +11,7 @@ describe PostPublisher::Tumblr::Publisher do
     PostPublisher::Tumblr::Authentication.new(opts)
   end
 
-	let(:blog_name){ 'rtsolv.tumblr.com' }
+  let(:blog_name){ 'rtsolv.tumblr.com' }
   let(:post){ { title: 'Hello, world!', body: 'Hello tumblr!' } }
   
   describe 'publish' do

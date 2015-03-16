@@ -9,7 +9,7 @@ module PostPublisher
         result = @client.text(blog_name, post)
 
         {
-					blog_name: blog_name,
+          blog_name: blog_name,
           content: post,
           id: result['id']
         }
