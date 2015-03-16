@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require './lib/twitter_publisher'
+require './lib/post_publisher'
 
-TwitterPublisher::CliTools.authenticate
+PostPublisher::Twitter::CliTools.authenticate
