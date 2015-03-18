@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/remotty/post_publisher/badge.svg)](https://coveralls.io/r/remotty/post_publisher)
 [![Code Climate](https://codeclimate.com/github/remotty/post_publisher/badges/gpa.svg)](https://codeclimate.com/github/remotty/post_publisher)
 [![Inline docs](http://inch-ci.org/github/remotty/post_publisher.svg?branch=master)](http://inch-ci.org/github/remotty/post_publisher)
+[![Dependency Status](https://gemnasium.com/remotty/post_publisher.svg)](https://gemnasium.com/remotty/post_publisher)
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/remotty/post_publisher/master)
 
 ## Install
@@ -12,13 +13,58 @@
 # gem install post_publisher
 ```
 
-or
-
 ```
 gem 'post_publisher'
 ```
 
 ## Usage
+
+## Support
+
+### Web Service
+
+* [ ] Hubtee Front
+* [x] Twitter
+* [ ] Facebook Page
+* [ ] Google+
+* [ ] Kakao
+* [ ] Linkedin
+
+### Blog
+
+* [x] Tumblr
+* [ ] Naver Blog
+* [ ] TatterTools
+* [ ] Qiita
+* [ ] Ghost
+* [ ] Midium
+* [ ] Daum blog api
+* [ ] Blogger
+* [ ] SVBTLE
+
+### CMS
+
+* [ ] Wordpress
+* [ ] Zeroboard XE
+* [ ] Dupral
+* [ ] Joolma
+* [ ] Naver Cafe
+* [ ] Daum Cafe
+
+### Storage
+
+* [ ] S3 
+
+### etc
+
+* [ ] Github Page
+* [ ] Gist
+* [ ] Mailgun(Email)
+* [ ] Evernote
+* [ ] Pocket
+* [ ] Reddit
+* [ ] Delicious
+* [ ] WebHook
 
 ## Contributors
 
