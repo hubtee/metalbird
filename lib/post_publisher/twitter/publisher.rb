@@ -17,7 +17,7 @@ module PostPublisher
         puts error
       end
 
-      def retweet(data)
+      def retweet(args)
         tweet = ::Twitter::Tweet.new(id: args.tweet_id)
         @client.retweet(tweet)
       rescue => error
