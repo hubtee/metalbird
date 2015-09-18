@@ -5,16 +5,22 @@ module PostPublisher
         @client = auth.client
       end
 
-      def publish(tweet)
-        result = @client.update(tweet)
+      def publish(args)
+        result = @client.update(args.tweet)
 
         {
-          content: tweet,
+          content: args.tweet,
           id: result.id
         }
 
       rescue => error
-        # Twitter::Error::Forbidden
+        puts error
+      end
+
+      def retweet(data)
+        tweet = ::Twitter::Tweet.new(id: args.tweet_id)
+        @client.retweet(tweet)
+      rescue => error
         puts error
       end
     end
