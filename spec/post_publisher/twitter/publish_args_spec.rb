@@ -28,14 +28,6 @@ describe Metalbird::Twitter::PublishArgs do
     )
   end
 
-  let(:links_images_args) do
-    subject.new(
-      tweet: tweet,
-      images: [image_file, image_file],
-      links: ['https://test.com', 'https://nacyot.com']
-    )
-  end
-
   describe '#initialize' do
     it "raise NoTweetError when there isn't tweet body" do
       expect do
@@ -90,6 +82,11 @@ describe Metalbird::Twitter::PublishArgs do
     context 'link_count' do
       it "returns true when there isn't link" do
         expect(basic_args.validate?).to be_truthy
+      end
+
+      it "returns true when body has link" do
+        data = { tweet: 'Hello, http://google.com' }
+        expect(subject.new(data).links?).to be_truthy
       end
 
       it 'returns true when there are four links' do
