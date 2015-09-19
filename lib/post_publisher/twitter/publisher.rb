@@ -6,22 +6,18 @@ module PostPublisher
       end
 
       def publish(args)
-        result = @client.update(args.tweet)
-
-        {
-          content: args.tweet,
-          id: result.id
-        }
-
+        @client.update(args.tweet)
       rescue => error
-        puts error
+        PostPublisher::Logger.error(error)
+        return false
       end
 
       def retweet(args)
         tweet = ::Twitter::Tweet.new(id: args.tweet_id)
         @client.retweet(tweet)
       rescue => error
-        puts error
+        PostPublisher::Logger.error(error)
+        return false
       end
     end
   end
