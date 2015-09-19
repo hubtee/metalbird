@@ -9,11 +9,11 @@
 
 ## Install
 
-```
-# gem install metalbird
+```sh
+$ gem install metalbird
 ```
 
-```
+```ruby
 gem 'post_publisher'
 ```
 
