@@ -20,14 +20,14 @@ describe PostPublisher::Twitter::Publisher do
   describe '#publish' do
     describe 'Success' do
       it 'send update message to client' do
-        expect(auth.client).to receive(:update).with(tweet_text)
+        expect(auth.client).to receive(:update).with(tweet_text, {})
         PostPublisher::Twitter::Publisher.new(auth).publish(publish_args)
       end
     end
 
     describe 'Fail' do
       it 'return false when publishing failed' do
-        allow(auth.client).to receive(:update).with(tweet_text).and_raise
+        allow(auth.client).to receive(:update).with(tweet_text, {}).and_raise
         publisher = PostPublisher::Twitter::Publisher.new(auth)
         expect(publisher.publish(publish_args)).to equal(false)
       end

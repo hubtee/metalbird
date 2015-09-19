@@ -6,7 +6,11 @@ module PostPublisher
       end
 
       def publish(args)
-        @client.update(args.tweet)
+        fail NotValidArgsError unless args.validate?
+
+        options = {}
+        options[:media_ids] = upload_images(args.images) if args.images?
+        @client.update(args.tweet, options)
       rescue => error
         PostPublisher::Logger.error(error)
         return false
@@ -19,6 +23,21 @@ module PostPublisher
         PostPublisher::Logger.error(error)
         return false
       end
+
+      private
+
+      def upload_images(images)
+        images.map { |image| upload(image) }.join(',')
+      end
+
+      def upload(file)
+        @client.upload(file)
+      rescue => error
+        PostPublisher::Logger.error(error)
+        return false
+      end
     end
+
+    class NotValidArgsError < StandardError; end
   end
 end
