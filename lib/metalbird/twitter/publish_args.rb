@@ -10,7 +10,7 @@ module Metalbird
       MAX_LINK_COUNT = 4
       MAX_IMAGE_COUNT = 4
 
-      attr_reader :tweet, :links, :images, :errors
+      attr_reader :links, :images, :errors
 
       def initialize(data)
         fail NoTweetError unless data[:tweet]
@@ -21,6 +21,11 @@ module Metalbird
         @links = ((data[:links] || []) + analyzed_tweet[:links]).uniq
         @images = data[:images] || []
         @errors = []
+      end
+
+      def tweet
+        return @tweet.strip + ' ' + links.join(' ') if links?
+        @tweet
       end
 
       def validate?
