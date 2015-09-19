@@ -1,4 +1,5 @@
 language: ruby
+sudo: false
 rvm:
   - 2.2.3
 env:
@@ -6,4 +7,4 @@ env:
   - SERVER_ENV=CI
   - secure: MqtV3eeHuUjIjncqAcSydfsofkM3bpSj0pcajw4L321qh8Wag1RIhqw+DqNLQALhgHFPv/B540AAJxxG1Y5exT8GfB98ZjIKwCa7Fpt8xZjh0bRHnzbmJSkWjhldRplAHUYuHTjOAq04/l13O0+1tw50CGjVQHjJdaS/2q2cihk=
 script:
-- bundle exec rspec
+  - bundle exec rspec
