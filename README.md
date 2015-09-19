@@ -1,11 +1,11 @@
 # Post Publisher Gem
 
-[![Build Status](https://travis-ci.org/remotty/post_publisher.svg)](https://travis-ci.org/remotty/post_publisher)
-[![Coverage Status](https://coveralls.io/repos/remotty/post_publisher/badge.svg)](https://coveralls.io/r/remotty/post_publisher)
-[![Code Climate](https://codeclimate.com/github/remotty/post_publisher/badges/gpa.svg)](https://codeclimate.com/github/remotty/post_publisher)
-[![Inline docs](http://inch-ci.org/github/remotty/post_publisher.svg?branch=master)](http://inch-ci.org/github/remotty/post_publisher)
-[![Dependency Status](https://gemnasium.com/remotty/post_publisher.svg)](https://gemnasium.com/remotty/post_publisher)
-[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/remotty/post_publisher/master)
+[![Build Status](https://travis-ci.org/hubtee/metalbird.svg)](https://travis-ci.org/hubtee/metalbird)
+[![Coverage Status](https://coveralls.io/repos/hubtee/metalbird/badge.svg)](https://coveralls.io/r/hubtee/metalbird)
+[![Code Climate](https://codeclimate.com/github/hubtee/metalbird/badges/gpa.svg)](https://codeclimate.com/github/hubtee/metalbird)
+[![Inline docs](http://inch-ci.org/github/hubtee/metalbird.svg?branch=master)](http://inch-ci.org/github/hubtee/metalbird)
+[![Dependency Status](https://gemnasium.com/hubtee/metalbird.svg)](https://gemnasium.com/hubtee/metalbird)
+[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/hubtee/metalbird/master)
 
 ## Install
 
