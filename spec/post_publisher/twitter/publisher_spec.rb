@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-module PostPublisher
+module Metalbird
   module Twitter
     describe Publisher do
       let(:auth) do
-        double('PostPublisher::Twitter::Authentication', client: double())
+        double('Metalbird::Twitter::Authentication', client: double())
       end
 
       let(:tweet_text) { 'Hello, world!' }

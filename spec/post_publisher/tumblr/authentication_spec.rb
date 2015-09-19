@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PostPublisher::Tumblr::Authentication do
+describe Metalbird::Tumblr::Authentication do
   let(:opts) do
     opts = {}
     opts[:consumer_key] = ''
@@ -14,20 +14,20 @@ describe PostPublisher::Tumblr::Authentication do
   describe 'Initialize - Opts validate' do
     it 'is fail when there isn\'t authentication key' do
       expect do
-        PostPublisher::Tumblr::Authentication.new({})
+        Metalbird::Tumblr::Authentication.new({})
       end.to raise_error(ArgumentError)
     end
 
     it 'is success when there are all authentication keys' do
       expect do
-        PostPublisher::Tumblr::Authentication.new(opts)
+        Metalbird::Tumblr::Authentication.new(opts)
       end.to_not raise_error
     end
   end
 
   describe 'Initialize' do
     let(:auth) do
-      PostPublisher::Tumblr::Authentication.new(opts)
+      Metalbird::Tumblr::Authentication.new(opts)
     end
     
     it 'is set client object' do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PostPublisher::Twitter::Authentication do
+describe Metalbird::Twitter::Authentication do
   let(:opts) do
     opts = {}
     opts[:consumer_key] = ''
@@ -14,20 +14,20 @@ describe PostPublisher::Twitter::Authentication do
   describe 'Initialize - Opts validate' do
     it 'is fail when there isn\'t authentication key' do
       expect do
-        PostPublisher::Twitter::Authentication.new({})
+        Metalbird::Twitter::Authentication.new({})
       end.to raise_error(ArgumentError)
     end
 
     it 'is success when there are all authentication keys' do
       expect do
-        PostPublisher::Twitter::Authentication.new(opts)
+        Metalbird::Twitter::Authentication.new(opts)
       end.to_not raise_error
     end
   end
 
   describe 'Initialize' do
     let(:auth) do
-      PostPublisher::Twitter::Authentication.new(opts)
+      Metalbird::Twitter::Authentication.new(opts)
     end
 
     it 'is set client object' do

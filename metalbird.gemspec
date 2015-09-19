@@ -1,13 +1,13 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-require 'post_publisher/version'
+require 'metalbird/version'
 
 Gem::Specification.new do |spec|
   # Project
-  spec.name        = 'post_publisher'
-  spec.version     = PostPublisher::VERSION
+  spec.name        = 'metalbird'
+  spec.version     = Metalbird::VERSION
   spec.licenses    = ['MIT']
   spec.platform    = Gem::Platform::RUBY
-  spec.homepage    = 'http://metalbirdhubtee.com'
+  spec.homepage    = 'http://metalbird.hubtee.com'
   spec.summary     = 'Library for publishing your contents to various platforms'
   spec.description = 'Library for publishing your contents to various platforms'
 

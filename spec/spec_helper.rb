@@ -1,6 +1,6 @@
-require 'post_publisher'
+require 'metalbird'
 require 'logger'
 require 'coveralls'
 Coveralls.wear!
 
-PostPublisher::Logger.level = Logger::FATAL
+Metalbird::Logger.level = Logger::FATAL

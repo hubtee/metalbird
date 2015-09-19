@@ -1,23 +1,56 @@
-# Post Publisher Gem
+# Metalbird - Library for Publishing posts
 
-[![Build Status](https://travis-ci.org/remotty/post_publisher.svg)](https://travis-ci.org/remotty/post_publisher)
-[![Coverage Status](https://coveralls.io/repos/remotty/post_publisher/badge.svg)](https://coveralls.io/r/remotty/post_publisher)
-[![Code Climate](https://codeclimate.com/github/remotty/post_publisher/badges/gpa.svg)](https://codeclimate.com/github/remotty/post_publisher)
-[![Inline docs](http://inch-ci.org/github/remotty/post_publisher.svg?branch=master)](http://inch-ci.org/github/remotty/post_publisher)
-[![Dependency Status](https://gemnasium.com/remotty/post_publisher.svg)](https://gemnasium.com/remotty/post_publisher)
-[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/remotty/post_publisher/master)
+[![Build Status](https://travis-ci.org/hubtee/metalbird.svg)](https://travis-ci.org/hubtee/metalbird)
+[![Coverage Status](https://coveralls.io/repos/hubtee/metalbird/badge.svg)](https://coveralls.io/r/hubtee/metalbird)
+[![Code Climate](https://codeclimate.com/github/hubtee/metalbird/badges/gpa.svg)](https://codeclimate.com/github/hubtee/metalbird)
+[![Inline docs](http://inch-ci.org/github/hubtee/metalbird.svg?branch=master)](http://inch-ci.org/github/hubtee/metalbird)
+[![Dependency Status](https://gemnasium.com/hubtee/metalbird.svg)](https://gemnasium.com/hubtee/metalbird)
+[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/hubtee/metalbird/master)
 
 ## Install
 
-```
-# gem install post_publisher
+```sh
+$ gem install metalbird
 ```
 
-```
-gem 'post_publisher'
+```ruby
+gem 'metalbird'
 ```
 
 ## Usage
+
+### Twitter
+
+```ruby
+require 'metalbird'
+
+opts = {}
+opts[:consumer_key] = ENV['TWITTER_CONSUMER_KEY']
+opts[:consumer_secret] = ENV['TWITTER_CONSUMER_SECRET']
+opts[:access_token] = ENV['ACCESS_TOKEN']
+opts[:access_token_secret] = ENV['ACCESS_TOKEN_SECRET']
+
+auth = Metalbird::Twitter::Authentication.new(opts)
+publisher = Metalbird::Twitter::Publisher.new(auth)
+
+# Post tweet
+args = Metalbird::Twitter::PublishArgs.new(tweet: 'Hello, World')
+publisher.publish(args)
+
+# Post tweet with images
+data = {
+  tweet: 'Hello, image',
+  images: [File.open('./images/image.jpg')]
+}
+args = Metalbird::Twitter::PublishArgs.new(data)
+publisher.publish(args)
+
+# Retweet
+args = Metalbird::Twitter::RetweetArgs.new(tweet_id: 645198939356983296)
+publisher.publish(args)
+```
+
+### Tumblr
 
 ## Support
 

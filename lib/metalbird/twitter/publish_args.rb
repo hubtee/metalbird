@@ -1,7 +1,7 @@
 require 'twitter-text'
 require 'uri'
 
-module PostPublisher
+module Metalbird
   module Twitter
     class PublishArgs
       MAX_TWEET_LENGTH = 140

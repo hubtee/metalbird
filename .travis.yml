@@ -1,10 +1,10 @@
 language: ruby
+sudo: false
 rvm:
-  - 1.9.3
-  - 2.2.1
+  - 2.2.3
 env:
   global:
-    - secure: "GsTst74irWe77XI+VJtJQKJjpc6Nz9z0CAEVcDglsNOJg//Enq2nyNeTkGexdge0AEa0u0kmYXFsWUrBteq0EBBGbZTl1XdMf1KW0CL8ni6i2AreaKkuV4e1aM/aXOD6lXycyzW/xaSo+9jvQyy2fF6mgs/pNNizFIz8Ja52iQY="
-    - SERVER_ENV=CI
+  - SERVER_ENV=CI
+  - secure: MqtV3eeHuUjIjncqAcSydfsofkM3bpSj0pcajw4L321qh8Wag1RIhqw+DqNLQALhgHFPv/B540AAJxxG1Y5exT8GfB98ZjIKwCa7Fpt8xZjh0bRHnzbmJSkWjhldRplAHUYuHTjOAq04/l13O0+1tw50CGjVQHjJdaS/2q2cihk=
 script:
   - bundle exec rspec

@@ -1,4 +1,4 @@
-module PostPublisher
+module Metalbird
   module Twitter
     class RetweetArgs
       attr_reader :tweet_id
