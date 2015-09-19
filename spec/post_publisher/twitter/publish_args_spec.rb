@@ -6,11 +6,16 @@ describe PostPublisher::Twitter::PublishArgs do
   let(:tweet) { 'Hello, world!' }
   let(:basic_args) { subject.new(tweet: tweet) }
   let(:empty_args) { subject.new(tweet: '') }
+  let(:image_file) { double('File', class: File) }
+
+  def link(i)
+    "http://example#{i}.com"
+  end
 
   let(:images_args) do
     data = {
       tweet: tweet,
-      images: ['Image1', 'Images2']
+      images: [image_file, image_file]
     }
 
     subject.new(data)
@@ -26,7 +31,7 @@ describe PostPublisher::Twitter::PublishArgs do
   let(:links_images_args) do
     subject.new(
       tweet: tweet,
-      images: ['Image1', 'Images2'],
+      images: [image_file, image_file],
       links: ['https://test.com', 'https://nacyot.com']
     )
   end
@@ -71,13 +76,13 @@ describe PostPublisher::Twitter::PublishArgs do
 
       it 'returns true when there are four images' do
         count = subject::MAX_IMAGE_COUNT
-        data = { tweet: tweet, images: Array.new(count) { 'Image' } }
+        data = { tweet: tweet, images: Array.new(count) { image_file } }
         expect(subject.new(data).validate?).to be_truthy
       end
 
       it 'returns false when there are more than four images' do
         count = subject::MAX_IMAGE_COUNT + 1
-        data = { tweet: tweet, images: Array.new(count) { 'Image' } }
+        data = { tweet: tweet, images: Array.new(count) { image_file } }
         expect(subject.new(data).validate?).to be_falsey
       end
     end
@@ -89,13 +94,35 @@ describe PostPublisher::Twitter::PublishArgs do
 
       it 'returns true when there are four links' do
         count = subject::MAX_LINK_COUNT
-        data = { tweet: tweet, links: Array.new(count) { 'Link' } }
+        data = { tweet: tweet, links: Array.new(count) { |i| link(i) } }
         expect(subject.new(data).validate?).to be_truthy
       end
 
       it 'returns false when there are more than four links' do
         count = subject::MAX_LINK_COUNT + 1
-        data = { tweet: tweet, links: Array.new(count) { 'Link' } }
+        data = { tweet: tweet, links: Array.new(count) { |i| link(i) } }
+        expect(subject.new(data).validate?).to be_falsey
+      end
+    end
+
+    context 'images are IO objects' do
+      it 'returns true when images are IO objects' do
+        expect(images_args.validate?).to be_truthy
+      end
+
+      it "returns false when images aren't IO objects" do
+        data = { tweet: tweet, images: ['STRING'] }
+        expect(subject.new(data).validate?).to be_falsey
+      end
+    end
+
+    context 'link is valid' do
+      it 'returns true when links are valid link' do
+        expect(links_args.validate?).to be_truthy
+      end
+
+      it 'retruns false when links is not valid link' do
+        data = { tweet: tweet, links: ['INVALID_LINK'] }
         expect(subject.new(data).validate?).to be_falsey
       end
     end
@@ -115,12 +142,12 @@ describe PostPublisher::Twitter::PublishArgs do
 
       context 'images and no links' do
         it 'returns true when the tweet is 117 char' do
-          data = { tweet: 'a' * 117, images: ['IMAGE'] }
+          data = { tweet: 'a' * 117, images: [image_file] }
           expect(subject.new(data).validate?).to be_truthy
         end
 
         it 'returns false when the tweet is 118 char' do
-          data = { tweet: 'a' * 118, images: ['IMAGE'] }
+          data = { tweet: 'a' * 118, images: [image_file] }
           expect(subject.new(data).validate?).to be_falsey
         end
       end
@@ -144,7 +171,7 @@ describe PostPublisher::Twitter::PublishArgs do
         end
 
         it 'returns false when the tweet is 95 char' do
-          data = { tweet: 'a' * 95, links: ['https://test.com'] * 2 }
+          data = { tweet: 'a' * 95, links: [link(1), link(2)] }
           expect(subject.new(data).validate?).to be_falsey
         end
       end
@@ -153,7 +180,7 @@ describe PostPublisher::Twitter::PublishArgs do
         it 'returns true when the tweet is 94 char' do
           data = {
             tweet: 'a' * 94,
-            images: ['IMAGES'],
+            images: [image_file],
             links: ['https://test.com']
           }
           expect(subject.new(data).validate?).to be_truthy

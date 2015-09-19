@@ -1,4 +1,5 @@
 require 'twitter-text'
+require 'uri'
 
 module PostPublisher
   module Twitter
@@ -9,7 +10,7 @@ module PostPublisher
       MAX_LINK_COUNT = 4
       MAX_IMAGE_COUNT = 4
 
-      attr_reader :tweet, :links, :images
+      attr_reader :tweet, :links, :images, :errors
 
       def initialize(data)
         fail NoTweetError unless data[:tweet]
@@ -17,15 +18,20 @@ module PostPublisher
         analyzed_tweet = analyze_tweet(data[:tweet])
 
         @tweet = analyzed_tweet[:tweet]
-        @links = (data[:links] || []) + analyzed_tweet[:links]
+        @links = ((data[:links] || []) + analyzed_tweet[:links]).uniq
         @images = data[:images] || []
+        @errors = []
       end
 
       def validate?
+        @errors = []
+
         validate_not_empty &&
           validate_image_count &&
           validate_link_count &&
-          validate_length
+          validate_length &&
+          validate_images &&
+          validate_links
       end
 
       def images?
@@ -47,19 +53,52 @@ module PostPublisher
       private
 
       def validate_not_empty
-        @tweet != ''
+        is_valid = @tweet != ''
+        return true if is_valid
+        @errors << EmptyTweetError.new
+        false
       end
 
       def validate_length
-        @tweet.length <= max_length 
+        length = @tweet.length
+        is_valid = length <= max_length
+        return true if is_valid
+        @errors << ExceedTweetLengthLimitError.new(length: length)
+        false
+      end
+
+      def validate_images
+        is_valid = @images.all? do |image|
+          image.class.ancestors.include?(IO)
+        end
+
+        return true if is_valid
+        @errors << NotValidImageError.new
+        false
+      end
+
+      def validate_links
+        is_valid = @links.all? do |link|
+          link =~ URI::regexp
+        end
+
+        return true if is_valid
+        @errors << NotValidLinkError.new
+        false
       end
 
       def validate_image_count
-        image_count <= MAX_IMAGE_COUNT
+        is_valid = image_count <= MAX_IMAGE_COUNT
+        return true if is_valid
+        @errors << ExceedImageCountLimitError.new(count: image_count)
+        false
       end
 
       def validate_link_count
-        link_count <= MAX_LINK_COUNT
+        is_valid = link_count <= MAX_LINK_COUNT
+        return true if is_valid
+        @errors << ExceedLinkCountLimitError.new(count: link_count)
+        false
       end
 
       def analyze_tweet(tweet)
@@ -89,5 +128,11 @@ module PostPublisher
     end
 
     class NoTweetError < StandardError; end
+    class EmptyTweetError < OpenStruct; end
+    class ExceedTweetLengthLimitError < OpenStruct; end
+    class NotValidImageError < OpenStruct; end
+    class NotValidLinkError < OpenStruct; end
+    class ExceedImageCountLimitError < OpenStruct; end
+    class ExceedLinkCountLimitError < OpenStruct; end
   end
 end
