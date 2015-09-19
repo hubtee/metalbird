@@ -34,10 +34,11 @@ module Metalbird
         @client.upload(file)
       rescue => error
         Metalbird::Logger.error(error)
-        return false
+        raise UploadingFailedError
       end
     end
 
     class NotValidArgsError < StandardError; end
+    class UploadingFailedError < StandardError; end
   end
 end
