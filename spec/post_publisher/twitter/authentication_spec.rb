@@ -29,7 +29,7 @@ describe PostPublisher::Twitter::Authentication do
     let(:auth) do
       PostPublisher::Twitter::Authentication.new(opts)
     end
-    
+
     it 'is set client object' do
       expect(auth.client).to_not be_nil
     end

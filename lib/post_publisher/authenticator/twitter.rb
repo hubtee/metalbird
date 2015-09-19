@@ -8,7 +8,7 @@ module PostPublisher
       @consumer_secret = ''
       @access_token = ''
       @accent_token_secret = ''
-      
+
       def self.authenticate
         set_consumer_keys
         set_access_tokens
@@ -19,7 +19,7 @@ module PostPublisher
       def self.set_consumer_keys
         puts "Set your consumer_key: "
         @consumer_key = gets.chomp
-        
+
         puts "Set your consumer_secret: "
         @consumer_secret = gets.chomp
       end
@@ -44,7 +44,7 @@ module PostPublisher
         @access_token = tokens.token
         @access_token_secret = tokens.secret
       end
-      
+
       def self.puts_authentication_information
         puts "consumer_key:        #{@consumer_key}"
         puts "consumer_secret:     #{@consumer_secret}"

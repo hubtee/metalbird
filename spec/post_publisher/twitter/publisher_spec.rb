@@ -1,36 +1,66 @@
 require 'spec_helper'
 
-describe PostPublisher::Twitter::Publisher do
-  let(:auth) do
-    opts = {}
-    opts[:consumer_key] = ''
-    opts[:consumer_secret] = ''
-    opts[:access_token] = ''
-    opts[:access_token_secret] = ''
-
-    PostPublisher::Twitter::Authentication.new(opts)
-  end
-
-  let(:tweet){'Hello, world!'}
-  
-  describe 'publish' do
-    specify 'Publish return tweet object' do
-      publisher = PostPublisher::Twitter::Publisher.new(auth)
-      allow(publisher).to receive(:publish) { Twitter::Tweet.new(id: 0) }
-
-      result = publisher.publish(tweet)
-      expect(result).to be_an_instance_of(Twitter::Tweet)
-    end
-
-    it 'raise Forbidden error when publishing failed' do
-      publisher = PostPublisher::Twitter::Publisher.new(auth)
-      allow(publisher).to receive(:publish) do
-        raise Twitter::Error::Forbidden
+module PostPublisher
+  module Twitter
+    describe Publisher do
+      let(:auth) do
+        double('PostPublisher::Twitter::Authentication', client: double())
       end
 
-      expect do
-        publisher.publish(tweet)
-      end.to raise_error(Twitter::Error::Forbidden)
+      let(:tweet_text) { 'Hello, world!' }
+      let(:tweet_id) { 1234 }
+      let(:tweet) { ::Twitter::Tweet.new(id: tweet_id) }
+      let(:publish_args) { PublishArgs.new(tweet: tweet_text) }
+      let(:retweet_args) { RetweetArgs.new(tweet_id: tweet_id) }
+
+      let(:publish_args_with_images) do
+        options = {
+          tweet: tweet_text,
+          images: [double('File', class: File), double('File', class: File)]
+        }
+        PublishArgs.new(options)
+      end
+
+      describe '#publish' do
+        describe 'Success' do
+          it 'send update message to client' do
+            expect(auth.client).to receive(:update).with(tweet_text, {})
+            Publisher.new(auth).publish(publish_args)
+          end
+
+          it 'send upload message when images attached' do
+            publisher = Publisher.new(auth)
+            expect(publisher).to receive(:upload).exactly(2).times
+            allow(auth.client).to receive(:update)
+            publisher.publish(publish_args_with_images)
+          end
+        end
+
+        describe 'Fail' do
+          it 'return false when publishing failed' do
+            allow(auth.client).to receive(:update).with(tweet_text, {}).and_raise
+            publisher = Publisher.new(auth)
+            expect(publisher.publish(publish_args)).to equal(false)
+          end
+        end
+      end
+
+      describe 'retweet' do
+        describe 'Success' do
+          it 'send retweet message to client' do
+            expect(auth.client).to receive(:retweet).with(tweet)
+            Publisher.new(auth).retweet(retweet_args)
+          end
+        end
+
+        describe 'Fail' do
+          it 'return false when retweet failed' do
+            allow(auth.client).to receive(:rewteet).with(tweet_id).and_raise
+            publisher = Publisher.new(auth)
+            expect(publisher.publish(retweet_args)).to equal(false)
+          end
+        end
+      end
     end
   end
 end

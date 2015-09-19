@@ -6,7 +6,7 @@ module PostPublisher
       attr_reader :client
 
       def initialize(opts = {})
-        validate_opts(opts)
+        assert_opts(opts)
 
         @client = ::Twitter::REST::Client.new do |config|
           config.consumer_key = opts[:consumer_key]
@@ -16,14 +16,17 @@ module PostPublisher
         end
       end
 
-      def validate_opts(opts)
-        if !opts[:consumer_key] ||
-           !opts[:consumer_secret] ||
-           !opts[:access_token] ||
-           !opts[:access_token_secret]
+      def assert_opts(opts)
+        fail ArgumentError unless validate_opts(opts)
+      end
 
-          fail ArgumentError
-        end
+      private
+
+      def validate_opts(opts)
+        opts[:consumer_key] ||
+          opts[:consumer_secret] ||
+          opts[:access_token] ||
+          opts[:access_token_secret]
       end
     end
   end
