@@ -2,35 +2,52 @@ require 'spec_helper'
 
 describe PostPublisher::Twitter::Publisher do
   let(:auth) do
-    opts = {}
-    opts[:consumer_key] = ''
-    opts[:consumer_secret] = ''
-    opts[:access_token] = ''
-    opts[:access_token_secret] = ''
-
-    PostPublisher::Twitter::Authentication.new(opts)
+    double('PostPublisher::Twitter::Authentication', client: double())
   end
 
-  let(:tweet){'Hello, world!'}
-  
-  describe 'publish' do
-    specify 'Publish return tweet object' do
-      publisher = PostPublisher::Twitter::Publisher.new(auth)
-      allow(publisher).to receive(:publish) { Twitter::Tweet.new(id: 0) }
+  let(:tweet_text) { 'Hello, world!' }
+  let(:tweet_id) { 12345 }
+  let(:tweet) { Twitter::Tweet.new(id: tweet_id) }
 
-      result = publisher.publish(tweet)
-      expect(result).to be_an_instance_of(Twitter::Tweet)
+  let(:publish_args) do
+    PostPublisher::Twitter::PublishArgs.new(tweet: tweet_text)
+  end
+
+  let(:retweet_args) do
+    PostPublisher::Twitter::RetweetArgs.new(tweet_id: tweet_id)
+  end
+
+  describe '#publish' do
+    describe 'Success' do
+      it 'send update message to client' do
+        expect(auth.client).to receive(:update).with(tweet_text)
+        PostPublisher::Twitter::Publisher.new(auth).publish(publish_args)
+      end
     end
 
-    it 'raise Forbidden error when publishing failed' do
-      publisher = PostPublisher::Twitter::Publisher.new(auth)
-      allow(publisher).to receive(:publish) do
-        raise Twitter::Error::Forbidden
+    describe 'Fail' do
+      it 'return false when publishing failed' do
+        allow(auth.client).to receive(:update).with(tweet_text).and_raise
+        publisher = PostPublisher::Twitter::Publisher.new(auth)
+        expect(publisher.publish(publish_args)).to equal(false)
       end
+    end
+  end
 
-      expect do
-        publisher.publish(tweet)
-      end.to raise_error(Twitter::Error::Forbidden)
+  describe 'retweet' do
+    describe 'Success' do
+      it 'send retweet message to client' do
+        expect(auth.client).to receive(:retweet).with(tweet)
+        PostPublisher::Twitter::Publisher.new(auth).retweet(retweet_args)
+      end
+    end
+
+    describe 'Fail' do
+      it 'return false when retweet failed' do
+        allow(auth.client).to receive(:rewteet).with(tweet_id).and_raise
+        publisher = PostPublisher::Twitter::Publisher.new(auth)
+        expect(publisher.publish(retweet_args)).to equal(false)
+      end
     end
   end
 end
