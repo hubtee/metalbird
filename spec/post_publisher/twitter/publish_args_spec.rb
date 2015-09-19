@@ -171,7 +171,7 @@ describe PostPublisher::Twitter::PublishArgs do
     end
   end
 
-  describe 'images?' do
+  describe '#images?' do
     it 'is true when there are images' do
       expect(images_args.images?).to be_truthy
     end
@@ -181,7 +181,7 @@ describe PostPublisher::Twitter::PublishArgs do
     end
   end
 
-  describe 'links?' do
+  describe '#links?' do
     it 'is true when there are links' do
       expect(links_args.links?).to be_truthy
     end
@@ -191,14 +191,14 @@ describe PostPublisher::Twitter::PublishArgs do
     end
   end
 
-  describe 'image_count' do
+  describe '#image_count' do
     it 'is length of images attribute' do
       expect(images_args.image_count).to be_equal(2)
       expect(basic_args.image_count).to be_equal(0)
     end
   end
 
-  describe 'link_count' do
+  describe '#link_count' do
     it 'is length of links attribute' do
       expect(links_args.link_count).to be_equal(2)
       expect(basic_args.link_count).to be_equal(0)
