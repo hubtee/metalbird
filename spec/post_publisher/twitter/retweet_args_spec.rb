@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe PostPublisher::Twitter::RetweetArgs do
-  subject { PostPublisher::Twitter::RetweetArgs }
+describe Metalbird::Twitter::RetweetArgs do
+  subject { Metalbird::Twitter::RetweetArgs }
 
   let(:tweet_id) { 1234 }
   let(:basic_args) { subject.new(tweet_id: tweet_id) }
@@ -10,7 +10,7 @@ describe PostPublisher::Twitter::RetweetArgs do
     it "raise NoTweetError when there isn't tweet body" do
       expect do
         subject.new({})
-      end.to raise_error(PostPublisher::Twitter::NoTweetIDError)
+      end.to raise_error(Metalbird::Twitter::NoTweetIDError)
     end
 
     it 'has attribute readers' do

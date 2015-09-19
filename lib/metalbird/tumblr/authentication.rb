@@ -1,6 +1,6 @@
 require 'tumblr_client'
 
-module PostPublisher
+module Metalbird
   module Tumblr
     class Authentication
       attr_reader :client

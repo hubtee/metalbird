@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe PostPublisher::Twitter::PublishArgs do
-  subject { PostPublisher::Twitter::PublishArgs }
+describe Metalbird::Twitter::PublishArgs do
+  subject { Metalbird::Twitter::PublishArgs }
 
   let(:tweet) { 'Hello, world!' }
   let(:basic_args) { subject.new(tweet: tweet) }
@@ -40,7 +40,7 @@ describe PostPublisher::Twitter::PublishArgs do
     it "raise NoTweetError when there isn't tweet body" do
       expect do
         subject.new({})
-      end.to raise_error(PostPublisher::Twitter::NoTweetError)
+      end.to raise_error(Metalbird::Twitter::NoTweetError)
     end
 
     it "'s links has empty when links param is empty" do

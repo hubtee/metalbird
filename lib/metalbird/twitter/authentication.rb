@@ -1,6 +1,6 @@
 require 'twitter'
 
-module PostPublisher
+module Metalbird
   module Twitter
     class Authentication
       attr_reader :client

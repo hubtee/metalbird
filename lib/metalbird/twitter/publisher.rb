@@ -1,4 +1,4 @@
-module PostPublisher
+module Metalbird
   module Twitter
     class Publisher
       def initialize(auth)
@@ -12,7 +12,7 @@ module PostPublisher
         options[:media_ids] = upload_images(args.images) if args.images?
         @client.update(args.tweet, options)
       rescue => error
-        PostPublisher::Logger.error(error)
+        Metalbird::Logger.error(error)
         return false
       end
 
@@ -20,7 +20,7 @@ module PostPublisher
         tweet = ::Twitter::Tweet.new(id: args.tweet_id)
         @client.retweet(tweet)
       rescue => error
-        PostPublisher::Logger.error(error)
+        Metalbird::Logger.error(error)
         return false
       end
 
@@ -33,7 +33,7 @@ module PostPublisher
       def upload(file)
         @client.upload(file)
       rescue => error
-        PostPublisher::Logger.error(error)
+        Metalbird::Logger.error(error)
         return false
       end
     end

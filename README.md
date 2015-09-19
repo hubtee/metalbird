@@ -14,7 +14,7 @@ $ gem install metalbird
 ```
 
 ```ruby
-gem 'post_publisher'
+gem 'metalbird'
 ```
 
 ## Usage
@@ -30,11 +30,11 @@ opts[:consumer_secret] = ENV['TWITTER_CONSUMER_SECRET']
 opts[:access_token] = ENV['ACCESS_TOKEN']
 opts[:access_token_secret] = ENV['ACCESS_TOKEN_SECRET']
 
-auth = PostPublisher::Twitter::Authentication.new(opts)
-publisher = PostPublisher::Twitter::Publisher.new(auth)
+auth = Metalbird::Twitter::Authentication.new(opts)
+publisher = Metalbird::Twitter::Publisher.new(auth)
 
 # Post tweet
-args = PostPublisher::Twitter::PublishArgs.new(tweet: 'Hello, World')
+args = Metalbird::Twitter::PublishArgs.new(tweet: 'Hello, World')
 publisher.publish(args)
 
 # Post tweet with images
@@ -42,11 +42,11 @@ data = {
   tweet: 'Hello, image',
   images: [File.open('./images/image.jpg')]
 }
-args = PostPublisher::Twitter::PublishArgs.new(data)
+args = Metalbird::Twitter::PublishArgs.new(data)
 publisher.publish(args)
 
 # Retweet
-args = PostPublisher::Twitter::RetweetArgs.new(tweet_id: 645198939356983296)
+args = Metalbird::Twitter::RetweetArgs.new(tweet_id: 645198939356983296)
 publisher.publish(args)
 ```
 

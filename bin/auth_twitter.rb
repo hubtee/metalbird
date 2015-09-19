@@ -2,4 +2,4 @@
 
 require './bin/authenticator'
 
-PostPublisher::Authenticator::Twitter.authenticate
+Metalbird::Authenticator::Twitter.authenticate

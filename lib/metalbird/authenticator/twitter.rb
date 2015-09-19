@@ -1,7 +1,7 @@
 # See http://d.hatena.ne.jp/riocampos+tech/20130615/p1
 require 'oauth'
 
-module PostPublisher
+module Metalbird
   module Twitter
     class CliTools
       @consumer_key = ''

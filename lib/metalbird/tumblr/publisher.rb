@@ -1,4 +1,4 @@
-module PostPublisher
+module Metalbird
   module Tumblr
     class Publisher
       def initialize(auth)
