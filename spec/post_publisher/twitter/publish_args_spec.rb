@@ -45,6 +45,12 @@ describe PostPublisher::Twitter::PublishArgs do
     it "'s images has empty when links param is empty" do
       expect(basic_args.images).to be_empty
     end
+
+    it 'has attribute readers' do
+      expect(basic_args).to respond_to(:tweet)
+      expect(basic_args).to respond_to(:links)
+      expect(basic_args).to respond_to(:images)
+    end
   end
 
   describe '#validate?' do
