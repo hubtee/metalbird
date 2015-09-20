@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 module Metalbird
   module UrlProcessor
     describe Default do
