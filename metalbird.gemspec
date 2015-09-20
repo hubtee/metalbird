@@ -32,6 +32,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency('twitter', '~> 5')
   spec.add_dependency('oauth', '~> 0.4')
   spec.add_dependency('tumblr_client', '~> 0.8')
+  spec.add_dependency('googl')
+  spec.add_dependency('bitly')
 
   # Development Dependency
   spec.add_development_dependency('guard')

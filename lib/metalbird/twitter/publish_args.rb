@@ -12,13 +12,14 @@ module Metalbird
 
       attr_reader :links, :images, :errors
 
-      def initialize(data)
+      def initialize(data, link_processor = nil)
         fail NoTweetError unless data[:tweet]
 
         analyzed_tweet = analyze_tweet(data[:tweet])
-
         @tweet = analyzed_tweet[:tweet]
+        @url_processor = link_processor || Metalbird::UrlProcessor::Default.new
         @links = ((data[:links] || []) + analyzed_tweet[:links]).uniq
+        @links = process_links
         @images = data[:images] || []
         @errors = []
       end
@@ -56,6 +57,10 @@ module Metalbird
       end
 
       private
+
+      def process_links
+        links.map { |link| @url_processor.generate(link) }
+      end
 
       def validate_not_empty
         is_valid = @tweet != ''
@@ -133,6 +138,7 @@ module Metalbird
     end
 
     class NoTweetError < StandardError; end
+
     class EmptyTweetError < OpenStruct; end
     class ExceedTweetLengthLimitError < OpenStruct; end
     class NotValidImageError < OpenStruct; end
