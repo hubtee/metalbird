@@ -2,21 +2,26 @@
 require 'oauth'
 
 module Metalbird
-  module Twitter
-    class CliTools
+  module Authenticator
+    class Twitter
       @consumer_key = ''
       @consumer_secret = ''
       @access_token = ''
       @accent_token_secret = ''
 
-      def self.authenticate
+      def initialize(oauth_url)
+        @oauth_url = oauth_url
+      end
+
+      def authenticate
         set_consumer_keys
         set_access_tokens
         puts_authentication_information
       end
 
       private
-      def self.set_consumer_keys
+
+      def set_consumer_keys
         puts "Set your consumer_key: "
         @consumer_key = gets.chomp
 
@@ -24,15 +29,15 @@ module Metalbird
         @consumer_secret = gets.chomp
       end
 
-      def self.get_oauth
+      def get_oauth
         OAuth::Consumer.new(
           @consumer_key,
           @consumer_secret,
-          site: 'https://api.twitter.com'
+          site: @oauth_url
         )
       end
 
-      def self.set_access_tokens
+      def set_access_tokens
         oauth = get_oauth
         request_token = oauth.get_request_token
 
@@ -45,7 +50,7 @@ module Metalbird
         @access_token_secret = tokens.secret
       end
 
-      def self.puts_authentication_information
+      def puts_authentication_information
         puts "consumer_key:        #{@consumer_key}"
         puts "consumer_secret:     #{@consumer_secret}"
         puts "access_token:        #{@access_token}"
