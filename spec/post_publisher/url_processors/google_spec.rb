@@ -17,6 +17,13 @@ module Metalbird
             allow(Googl).to receive(:shorten).and_return(shorten_object)
             expect(google.generate(url)).to be_eql(shorten_url)
           end
+
+          it 'retry and return shorten url when request failed.' do
+            allow(Googl).to(receive(:shorten)
+                             .and_raise(StandardError)
+                             .and_return(shorten_object))
+            expect(google.generate(url)).to be_eql(shorten_url)
+          end
         end
 
         context 'fail' do
@@ -33,10 +40,16 @@ module Metalbird
             allow(Googl).to receive(:expand).and_return(expanded_object)
             expect(google.expand(url)).to be_eql(url)
           end
+
+          it 'retry and return expanded url when request failed.' do
+            allow(Googl).to(receive(:expand)
+                             .and_raise(StandardError)
+                             .and_return(expanded_object))
+            expect(google.expand(url)).to be_eql(url)
+          end
         end
 
         context 'fail' do
-
           it 'raise URLExpandFailError' do
             allow(Googl).to receive(:expand).and_raise(StandardError)
             expect { google.expand(url) }.to raise_error(URLExpandFailError)
