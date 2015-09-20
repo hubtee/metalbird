@@ -12,7 +12,7 @@ module Metalbird
 
       describe '#expand' do
         it 'returns the param' do
-          expect(subject.generate(url)).to be_equal(url)
+          expect(subject.expand(url)).to be_equal(url)
         end
       end
     end
