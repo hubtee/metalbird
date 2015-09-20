@@ -5,7 +5,7 @@ module Metalbird
   module UrlProcessor
     describe Google do
       let(:api_key) { 'this_is_api_key' }
-      let(:google) { Google.new(api_key) }
+      let(:google) { Google.new(api_key: api_key) }
       let(:url) { 'http://github.com/nacyot' }
       let(:shorten_url) { 'https://goo.gl/abcd' }
       let(:shorten_object) { double(nil, short_url: shorten_url) }

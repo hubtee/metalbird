@@ -7,9 +7,9 @@ module Metalbird
 
       attr_reader :client
 
-      def initialize(api_key)
+      def initialize(opts)
         @client = Googl
-        @key = api_key
+        @key = opts[:api_key]
       end
 
       def generate(link)
