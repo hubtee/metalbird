@@ -40,11 +40,11 @@ module Metalbird
       end
 
       def images?
-        true if @images.length > 0
+        true if images.length > 0
       end
 
       def links?
-        true if @links.length > 0
+        true if links.length > 0
       end
 
       def image_count
@@ -73,7 +73,7 @@ module Metalbird
       end
 
       def validate_images
-        is_valid = @images.all? do |image|
+        is_valid = images.all? do |image|
           image.class.ancestors.include?(IO)
         end
 
@@ -83,7 +83,7 @@ module Metalbird
       end
 
       def validate_links
-        is_valid = @links.all? do |link|
+        is_valid = links.all? do |link|
           link =~ URI::regexp
         end
 
