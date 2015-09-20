@@ -1,7 +1,7 @@
 require './lib/metalbird'
 require 'pp'
 
-Dotenv::Railtie.load
+Dotenv.load
 
 opts = {}
 opts[:consumer_key] = ENV['TWITTER_CONSUMER_KEY']

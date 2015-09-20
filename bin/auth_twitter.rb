@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
-require './bin/authenticator'
+require './lib/metalbird/authenticators/twitter.rb'
 
-Metalbird::Authenticator::Twitter.authenticate
+url = 'https://api.twitter.com'
+authenticator = Metalbird::Authenticator::Twitter.new(url)
+authenticator.authenticate
