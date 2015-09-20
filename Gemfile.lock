@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     metalbird (0.0.1)
+      googl
       oauth (~> 0.4)
       tumblr_client (~> 0.8)
       twitter (~> 5)
@@ -33,6 +34,9 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     ffi (1.9.10)
     formatador (0.2.5)
+    googl (0.7.0)
+      httparty (~> 0.10)
+      json (>= 1.4.6)
     guard (2.13.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
@@ -56,6 +60,9 @@ GEM
       domain_name (~> 0.5)
     http-form_data (1.0.1)
     http_parser.rb (0.6.0)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     json (1.8.3)
     listen (3.0.3)
       rb-fsevent (>= 0.9.3)
@@ -65,6 +72,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
     mime-types (2.6.2)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     naught (1.1.0)
     nenv (0.2.0)
